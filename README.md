@@ -10,30 +10,6 @@ A simple personal key logger for modern Windows, Linux and OS X systems.
 * [Python for Windows Extensions (pywin32)](https://sourceforge.net/projects/pywin32/files/pywin32/)
 * [PyHook for Python 3](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyhook)
 
-## OS X
-
-Either,
-
-* Python 2.7 (pre-installed)
-* ```bash
-  sudo pip install git+https://github.com/abarnert/pykeycode
-  ```
-* Add the Python 2.7 app to the allowed apps in **System Preferences > Security & Privacy > Accessibility**.
-
-
-or,
-
-* [Python 3.5](https://www.python.org/downloads/)
-* ```bash
-  xcode-select --install
-  ```
-* ```
-  sudo pip3 install git+https://github.com/abarnert/pykeycode
-  sudo pip3 install pyobjc
-  ```
-* Add the Python 3.5 app to the allowed apps in **System Preferences > Security & Privacy > Accessibility**.
-
-
 ## Linux (Xlib)
 
 On modern Ubuntu-like systems:
@@ -41,6 +17,26 @@ On modern Ubuntu-like systems:
 ```bash
 sudo apt-get install -y python3 python3-pip python3-xlib
 ```
+
+
+## OS X
+
+Either,
+
+* Python 2.7 (pre-installed)
+* `$ sudo pip install git+https://github.com/abarnert/pykeycode`
+* Add the Python 2.7 app to the allowed apps in **System Preferences > Security & Privacy > Accessibility**.
+
+
+or,
+
+* [Python 3.5](https://www.python.org/downloads/)
+* `$ xcode-select --install`
+* `$ sudo pip3 install git+https://github.com/abarnert/pykeycode`
+* `$ sudo pip3 install pyobjc`
+* Add the Python 3.5 app to the allowed apps in **System Preferences > Security & Privacy > Accessibility**.
+
+
 
 # Usage
 
