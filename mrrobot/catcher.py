@@ -9,7 +9,7 @@ if 'Windows' in system:
 elif 'Linux' in system:
     from .catchers.linux import Catcher
 
-elif 'Mac' in system:
+elif 'Darwin' in system:
     from .catchers.mac import Catcher
 
 else:

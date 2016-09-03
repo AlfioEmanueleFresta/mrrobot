@@ -1,4 +1,4 @@
-class Catcher:
+class Catcher(object):
 
     def __init__(self, logger=None):
         self.logger = logger

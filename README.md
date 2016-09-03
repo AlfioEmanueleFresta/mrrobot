@@ -1,6 +1,6 @@
 # Mr Robot
 
-A simple key logger for Windows, Linux and OS X.
+A simple personal key logger for modern Windows, Linux and OS X systems.
 
 # Requirements
 
@@ -11,6 +11,11 @@ A simple key logger for Windows, Linux and OS X.
 * [PyHook for Python 3](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyhook)
 
 ## OS X
+
+* Python 2.7 (pre-installed)
+* ```bash
+  sudo pip install git+https://github.com/abarnert/pykeycode
+  ```
 
 TODO
 
@@ -24,7 +29,7 @@ sudo apt-get install -y python3 python3-pip python3-xlib
 
 # Usage
 
-Talk is cheap, show me `example.py`.
+*Talk is cheap*, show me an `example.py`.
 
 ```python
 from mrrobot.catcher import Catcher

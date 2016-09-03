@@ -19,7 +19,7 @@ class Debugger:
         print("Received: character='%s', args=(%s), kwargs=(%s)" % (character, args, kwargs))
 
 
-class Buffer:
+class Buffer(object):
 
     DEFAULT_BUFFER_SIZE = 32
 
