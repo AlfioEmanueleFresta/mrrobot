@@ -29,7 +29,7 @@ class Buffer:
 
     def callback(self, character, *args, **kwargs):
         self.buffer.append((datetime.now(), (character, args, kwargs)))
-        if len(self.buffer) == self.buffer_size:
+        if len(self.buffer) >= self.buffer_size:
             self.use_buffer(self.buffer)
             self.buffer = []
 
