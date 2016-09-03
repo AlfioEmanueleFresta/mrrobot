@@ -20,16 +20,12 @@ class Catcher(GenericCatcher):
         from Foundation import NSObject, NSLog
         from Cocoa import NSEvent, NSKeyDownMask
         from PyObjCTools import AppHelper
-        import keycode
 
         def handler(event):
             try:
-                character = keycode.tostring(event.keyCode())
-                print("Character: %s" % character)
-                #NSLog(u"%@", event)
+                character = event.keyCode()
+                self.callback(character, "apple-keycode")
 
-                # TODO
-                self.callback(character=character)
             except KeyboardInterrupt:
                 AppHelper.stopEventLoop()
 
@@ -41,6 +37,5 @@ class Catcher(GenericCatcher):
         app = NSApplication.sharedApplication()
         delegate = AppDelegate.alloc().init()
         NSApp().setDelegate_(delegate)
-        print("Running event loop")
         AppHelper.runEventLoop()
 

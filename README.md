@@ -61,7 +61,7 @@ c.run()
 
 ```
 
-## Other loggers
+## More loggers
 
 Here are a few included included loggers (in `mrrobot.logger`):
 
@@ -100,6 +100,27 @@ for entry in get_log_entries("output.txt"):
                                        entry.character))
 ```
 
+### Log format
+
+**Format**
+```
+DATE TIME [KEY, [MODIFIERS...], {ATTRIBUTES...}]\n
+```
+Where `DATE TIME` is ISO 8601 using spaces as components separator and the
+rest of the line is a JSON list.
+
+
+**Windows, Linux example:**
+```
+2016-09-03 05:05:02.020540 ['a', [], {}]
+```
+
+**OS X example:**
+```
+2016-09-03 05:07:06.450590 [10, ["apple-keycode"], {}]
+```
+
+`apple-keycode` means 
 
 # License
 
