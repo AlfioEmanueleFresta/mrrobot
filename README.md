@@ -151,7 +151,7 @@ be compressed using Gzip. Similarly, `get_log_entries` will decompress the file
 on-the-fly.
 
 ### Write example
-```
+```python
 l = FileLogger(filename="output.txt.gz")
 ```
 
