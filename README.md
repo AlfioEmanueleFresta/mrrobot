@@ -129,12 +129,12 @@ for entry in get_log_entries("output.txt"):
 You can use an pair of RSA keys, either in OpenSSH (`id_rsa`, `id_rsa.pub`) or
 OpenSSL format (`.pem` files), to encrypt your logs.
 
-To generate a pair of keys on Linux:
+To generate a pair of RSA keys on Linux:
 ```bash
-ssh-keygen -t rsa
+$ ssh-keygen -t rsa
 ```
 
-Then you can start an encrypted key logger:
+Then you can start an encrypted key logger, e.g.:
 
 ```python
 from mrrobot.catcher import Catcher
@@ -148,7 +148,7 @@ c = Catcher(logger=l)
 c.run()
 ```
 
-And read the log with:
+And read the log, e.g.:
 
 ```python
 from mrrobot.reader import get_log_entries

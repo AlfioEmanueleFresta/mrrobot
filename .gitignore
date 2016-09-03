@@ -3,3 +3,4 @@
 output*
 .venv
 logger.py
+id_rsa*
