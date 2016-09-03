@@ -8,8 +8,7 @@ class Catcher(GenericCatcher):
 
     def run(self):
 
-        import pyHook
-        import pythoncom
+        from .pyxhook import HookManager
 
         def _callback(x):
             character = chr(x.Ascii)
@@ -17,7 +16,7 @@ class Catcher(GenericCatcher):
                 self.callback(character=character)
             return True
 
-        manager = pyHook.HookManager()
+        manager = HookManager()
         manager.KeyUp = _callback
         manager.HookKeyboard()
-        pythoncom.PumpMessages()
+        manager.start()

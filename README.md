@@ -16,7 +16,11 @@ TODO
 
 ## Linux (X server)
 
-TODO
+On modern Ubuntu-like systems:
+
+```bash
+sudo apt-get install -y python3 python3-pip python3-xlib
+```
 
 # Usage
 
