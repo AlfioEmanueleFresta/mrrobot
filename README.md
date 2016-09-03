@@ -12,14 +12,29 @@ A simple personal key logger for modern Windows, Linux and OS X systems.
 
 ## OS X
 
+Either,
+
 * Python 2.7 (pre-installed)
 * ```bash
   sudo pip install git+https://github.com/abarnert/pykeycode
   ```
+* Add the Python 2.7 app to the allowed apps in **System Preferences > Security & Privacy > Accessibility**.
 
-TODO
 
-## Linux (X server)
+or,
+
+* [Python 3.5](https://www.python.org/downloads/)
+* ```bash
+  xcode-select --install
+  ```
+* ```
+  sudo pip3 install git+https://github.com/abarnert/pykeycode
+  sudo pip3 install pyobjc
+  ```
+* Add the Python 3.5 app to the allowed apps in **System Preferences > Security & Privacy > Accessibility**.
+
+
+## Linux (Xlib)
 
 On modern Ubuntu-like systems:
 
