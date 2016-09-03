@@ -30,6 +30,6 @@ def get_log_lines(filename):
             yield line.rstrip('\n')
 
 
-def get_log_entries(filename, compressed=False):
-    for line in get_log_lines(filename=filename, compressed=compressed):
+def get_log_entries(filename):
+    for line in get_log_lines(filename=filename):
         yield parse_event_line(line)
