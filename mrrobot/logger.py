@@ -39,9 +39,9 @@ class Buffer:
 
 class FileLogger(Buffer):
 
-    def __init__(self, filename, compress=False, *args, **kwargs):
+    def __init__(self, filename, *args, **kwargs):
         self.filename = filename
-        self.compress = compress
+        self.compress = '.gz' in filename
         super(FileLogger, self).__init__(*args, **kwargs)
 
     def use_buffer(self, buffer):
@@ -56,7 +56,7 @@ class CompressedFileLogger(FileLogger):
     DEFAULT_BUFFER_SIZE = 256
 
     def __init__(self, *args, **kwargs):
-        kwargs['compress'] = True
+        kwargs['filename'] = kwargs['filename'] if '.gz' in kwargs['filename'] else "%s.gz" % kwargs['filename']
         super(CompressedFileLogger, self).__init__(*args, **kwargs)
 
 
@@ -64,7 +64,7 @@ class FileBuffer(FileLogger):
 
     DEFAULT_FILE_BUFFER_SIZE = 1024
 
-    def __init__(self, *args, file_buffer_size=DEFAULT_FILE_BUFFER_SIZE, **kwargs):
+    def __init__(self, file_buffer_size=DEFAULT_FILE_BUFFER_SIZE, *args, **kwargs):
         self.file_buffer_size = file_buffer_size
         super(FileBuffer, self).__init__(*args, **kwargs)
 

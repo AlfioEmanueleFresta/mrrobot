@@ -53,7 +53,7 @@ Here are a few included included loggers (in `mrrobot.logger`):
 Debugger()  # Prints out all characters. Not very useful.
 FileLogger("output.txt")  # Logs to a memory buffer and occasionally append text to a file.
 FileLogger("output.txt", buffer_size=1)  # You can also change the buffer size.
-FileLogger("output.txt.gz", buffer_size=1024, compress=True)  # Gzip compression (use only with large buffer sizes).
+FileLogger("output.txt.gz", buffer_size=1024)  # Gzip compression (use only with large buffer sizes).
 CompressedFileLogger("output.txt.gz")  # Alias for the previous logger.
 ```
 
