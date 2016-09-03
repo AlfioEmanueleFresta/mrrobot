@@ -22,7 +22,7 @@ TODO
 
 Talk is cheap, show me `example.py`.
 
-```python3
+```python
 from mrrobot.catcher import Catcher
 from mrrobot.logger import FileLogger
 
