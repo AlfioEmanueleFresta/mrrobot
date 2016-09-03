@@ -9,7 +9,7 @@ A simple personal key logger in Python.
 * Simple high-level Python API;
 * Configurable memory buffer (with reasonable defaults), to avoid frequent write operations on disks;
 * Public-key cryptography, allowing you to encrypt the data and keep the decryption key in a separate place;
-* Async IO in OS X (coming soon on Windows and Linux);
+* Async IO in OS X and Linux;
 * Collects timing data -- useful for timing analytics.
 
 
