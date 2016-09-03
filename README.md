@@ -1,6 +1,17 @@
 # Mr Robot
 
-A simple personal key logger for modern Windows, Linux and OS X systems.
+A simple personal key logger in Python.
+
+
+**Features include**:
+
+* Runs on Linux (Xlib), OS X and recent Windows operating systems;
+* Simple high-level Python API;
+* Configurable memory buffer (with reasonable defaults), to avoid frequent write operations on disks;
+* Public-key cryptography, allowing you to encrypt the data and keep the decryption key in a separate place;
+* Async IO in OS X (coming soon on Windows and Linux);
+* Collects timing data -- useful for timing analytics.
+
 
 # Requirements
 
@@ -158,7 +169,17 @@ rest of the line is a JSON list.
 2016-09-03 05:07:06.450590 [10, ["apple-keycode"], {}]
 ```
 
-`apple-keycode` means 
+`apple-keycode` means
+
+# Compatibility
+
+| *Feature \ Platform* | **Linux (Xlib)**             | **Windows**                  | **OS X**  |
+|----------------------|------------------------------|------------------------------|-----------|
+| **Backend**          | `python3-xlib`               | `pyHook` (`pywin32`)         | `pyobjc`  |
+| **Event**            | KeyDown                      | KeyDown                      | KeyDown   |
+| **Captured keys**    | All ASCII, Return, Backspace | All ASCII, Return, Backspace | All ASCII |
+| **Case sensitive**   | Yes                          | No                           | Yes       |
+
 
 # License
 
