@@ -39,12 +39,17 @@ class Buffer(object):
 
 class FileLogger(Buffer):
 
-    def __init__(self, filename, *args, **kwargs):
+    def __init__(self, filename, public_key_file=None, *args, **kwargs):
+        from .rsa import read_key
         self.filename = filename
         self.compress = '.gz' in filename
+        self.public_key = read_key(public_key_file) if public_key_file else None
         super(FileLogger, self).__init__(*args, **kwargs)
 
     def _prepare_line(self, line):
+        if self.public_key:
+            from .rsa import rsa_encrypt_string
+            return rsa_encrypt_string(self.public_key, line)
         return line
 
     def use_buffer(self, buffer):
@@ -63,20 +68,6 @@ class CompressedFileLogger(FileLogger):
     def __init__(self, *args, **kwargs):
         kwargs['filename'] = kwargs['filename'] if '.gz' in kwargs['filename'] else "%s.gz" % kwargs['filename']
         super(CompressedFileLogger, self).__init__(*args, **kwargs)
-
-
-class EncryptedFileLogger(FileLogger):
-
-    DEFAULT_BUFFER_SIZE = 8
-
-    def __init__(self, public_key_file, *args, **kwargs):
-        from .rsa import read_key
-        self.public_key = read_key(public_key_file)
-        super(EncryptedFileLogger, self).__init__(*args, **kwargs)
-
-    def _prepare_line(self, line):
-        from .rsa import rsa_encrypt_string
-        return rsa_encrypt_string(self.public_key, line)
 
 
 class FileBuffer(FileLogger):

