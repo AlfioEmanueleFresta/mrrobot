@@ -9,6 +9,7 @@ A simple personal key logger for modern Windows, Linux and OS X systems.
 * [Python 3.5](https://www.python.org/downloads/)
 * [Python for Windows Extensions (pywin32)](https://sourceforge.net/projects/pywin32/files/pywin32/)
 * [PyHook for Python 3](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyhook)
+* `> pip install pycrypto`
 
 ## Linux (Xlib)
 
@@ -16,8 +17,8 @@ On modern Ubuntu-like systems:
 
 ```bash
 sudo apt-get install -y python3 python3-pip python3-xlib
+sudo pip3 install pycrypto
 ```
-
 
 ## OS X
 
@@ -25,6 +26,7 @@ Either,
 
 * Python 2.7 (pre-installed)
 * `$ sudo pip install git+https://github.com/abarnert/pykeycode`
+* `$ sudo pip install pycrypto`
 * Add the Python 2.7 app to the allowed apps in **System Preferences > Security & Privacy > Accessibility**.
 
 
@@ -34,6 +36,7 @@ or,
 * `$ xcode-select --install`
 * `$ sudo pip3 install git+https://github.com/abarnert/pykeycode`
 * `$ sudo pip3 install pyobjc`
+* `$ sudo pip3 install pycrypto`
 * Add the Python 3.5 app to the allowed apps in **System Preferences > Security & Privacy > Accessibility**.
 
 
@@ -98,6 +101,41 @@ for entry in get_log_entries("output.txt"):
 
     print("Time=%s, Character='%s'" % (entry.timestamp,
                                        entry.character))
+```
+
+## Encryption
+
+You can use an pair of RSA keys, either in OpenSSH (`id_rsa`, `id_rsa.pub`) or
+OpenSSL format (`.pem` files), to encrypt your logs.
+
+To generate a pair of keys on Linux:
+```bash
+ssh-keygen -t rsa
+```
+
+Then you can start an encrypted key logger:
+
+```python
+from mrrobot.catcher import Catcher
+from mrrobot.logger import EncryptedFileLogger
+
+
+l = EncryptedFileLogger(filename="output.txt",
+                        public_key_file="~/.ssh/id_rsa.pub")
+
+c = Catcher(logger=l)
+c.run()
+```
+
+And read the log with:
+
+```python
+from mrrobot.reader import get_log_entries
+
+
+for entry in get_log_entries("output.txt",
+                             private_key_file="~/.ssh/id_rsa"):
+    print(entry)
 ```
 
 ### Log format
