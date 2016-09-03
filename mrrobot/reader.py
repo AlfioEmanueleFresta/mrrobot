@@ -12,7 +12,7 @@ class KeyEvent:
         self.kwargs = kwargs
 
     def __repr__(self):
-        return "<KeyEvent timestamp=%s, char='%s'>" % (self.time, self.character)
+        return "<KeyEvent timestamp=%s, char='%s'>" % (self.timestamp, self.character)
 
 
 def parse_event_line(line):
@@ -30,6 +30,10 @@ def get_log_lines(filename):
             yield line.rstrip('\n')
 
 
-def get_log_entries(filename):
+def get_log_entries(filename, private_key_file=None):
+    from .rsa import read_key, rsa_decrypt_string
+    key = read_key(private_key_file) if private_key_file else None
     for line in get_log_lines(filename=filename):
+        if key:
+            line = rsa_decrypt_string(key, line)
         yield parse_event_line(line)
