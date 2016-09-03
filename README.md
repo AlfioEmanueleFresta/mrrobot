@@ -69,6 +69,22 @@ Buffer(buffer_size=32)  # A simple logger with a configurable memory buffer.
 FileBuffer("buffer.txt", buffer_size=32, file_buffer_size=1024)
 ```
 
+## Reading
+
+You can read a log written using `FileLogger` or `CompressedFileLogger` with the `get_log_entries` generator:
+
+```python3
+from mrrobot.reader import get_log_entries
+
+
+for entry in get_log_entries("output.txt"):
+# for entry in get_log_entries("output.txt.gz"):
+
+    print("Time=%s, Character='%s'" % (entry.timestamp,
+                                       entry.character))
+```
+
+
 # License
 
 GPLv3

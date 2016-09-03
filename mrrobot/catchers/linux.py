@@ -9,6 +9,7 @@ class Catcher(GenericCatcher):
     def run(self):
 
         from .pyxhook import HookManager
+        import time
 
         def _callback(x):
             character = chr(x.Ascii)
