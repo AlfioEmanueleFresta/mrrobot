@@ -64,6 +64,8 @@ or,
 
 # Usage
 
+## Key logger example
+
 *Talk is cheap*, show me an `example.py`.
 
 ```python
@@ -72,7 +74,6 @@ from mrrobot.logger import FileLogger
 
 
 # A file logger that writes to 'output.txt' every 32 key strokes (default buffer_size).
-# If your filename ends in '.gz', e.g. 'output.txt.gz', it will be compressed using gzip.
 l = FileLogger(filename="output.txt")
 
 # Get our platform's keys catcher, and connect it to our logger.
@@ -83,7 +84,23 @@ c.run()
 
 ```
 
-## More loggers
+## Reading the log
+
+You can read a log written using `FileLogger` with the `get_log_entries` generator:
+
+```python
+from mrrobot.reader import get_log_entries
+
+
+for entry in get_log_entries("output.txt"):
+
+    print("Time=%s, Character='%s'" % (entry.timestamp,
+                                       entry.character))
+```
+
+
+
+## Quick reference
 
 Here are a few included included loggers (in `mrrobot.logger`):
 
@@ -91,35 +108,9 @@ Here are a few included included loggers (in `mrrobot.logger`):
 Debugger()  # Prints out all characters. Not very useful.
 FileLogger("output.txt")  # Logs to a memory buffer and occasionally append text to a file.
 FileLogger("output.txt", buffer_size=1)  # You can also change the buffer size.
-FileLogger("output.txt.gz", buffer_size=1024)  # Gzip compression (use only with large buffer sizes).
-CompressedFileLogger("output.txt.gz")  # Alias for the previous logger.
-```
-
-There are also a few abstract interfaces (with non-implemented methods):
-
-```python
-Logger()  # A simple logger.
-Buffer(buffer_size=32)  # A simple logger with a configurable memory buffer.
-
-# As above, but a file is used as a higher level buffer.
-# Ideally, to be used if you want occasional network operations but
-# want to persist frequently to disk.
-FileBuffer("buffer.txt", buffer_size=32, file_buffer_size=1024)
-```
-
-## Reading
-
-You can read a log written using `FileLogger` or `CompressedFileLogger` with the `get_log_entries` generator:
-
-```python
-from mrrobot.reader import get_log_entries
-
-
-# If your file name ends in '.gz', it will be decompressed on-the-fly.
-for entry in get_log_entries("output.txt"):
-
-    print("Time=%s, Character='%s'" % (entry.timestamp,
-                                       entry.character))
+FileLogger("output.txt.gz")  # Gzip compression (use only with default or large buffer sizes).
+FileLogger("output.txt", public_key_file="id_rsa.pub")  # Use RSA encryption.
+FileLogger("output.txt.gz", public_key_file="id_rsa.pub")  # Use RSA encryption + gzip compression.
 ```
 
 ## Encryption
