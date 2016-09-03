@@ -73,7 +73,7 @@ FileBuffer("buffer.txt", buffer_size=32, file_buffer_size=1024)
 
 You can read a log written using `FileLogger` or `CompressedFileLogger` with the `get_log_entries` generator:
 
-```python3
+```python
 from mrrobot.reader import get_log_entries
 
 
