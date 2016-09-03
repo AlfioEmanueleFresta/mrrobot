@@ -13,6 +13,16 @@ A simple personal key logger in Python.
 * Collects timing data -- useful for timing analytics.
 
 
+# Compatibility
+
+| *Feature \ Platform* | **Linux (Xlib)**             | **Windows**                  | **OS X**  |
+|----------------------|------------------------------|------------------------------|-----------|
+| **Backend**          | `python3-xlib`               | `pyHook` (`pywin32`)         | `pyobjc`  |
+| **Event**            | KeyDown                      | KeyDown                      | KeyDown   |
+| **Captured keys**    | All ASCII, Return, Backspace | All ASCII, Return, Backspace | All ASCII |
+| **Case sensitive**   | Yes                          | No                           | Yes       |
+
+
 # Requirements
 
 ## Windows
@@ -149,36 +159,6 @@ for entry in get_log_entries("output.txt",
     print(entry)
 ```
 
-### Log format
-
-**Format**
-```
-DATE TIME [KEY, [MODIFIERS...], {ATTRIBUTES...}]\n
-```
-Where `DATE TIME` is ISO 8601 using spaces as components separator and the
-rest of the line is a JSON list.
-
-
-**Windows, Linux example:**
-```
-2016-09-03 05:05:02.020540 ['a', [], {}]
-```
-
-**OS X example:**
-```
-2016-09-03 05:07:06.450590 [10, ["apple-keycode"], {}]
-```
-
-`apple-keycode` means
-
-# Compatibility
-
-| *Feature \ Platform* | **Linux (Xlib)**             | **Windows**                  | **OS X**  |
-|----------------------|------------------------------|------------------------------|-----------|
-| **Backend**          | `python3-xlib`               | `pyHook` (`pywin32`)         | `pyobjc`  |
-| **Event**            | KeyDown                      | KeyDown                      | KeyDown   |
-| **Captured keys**    | All ASCII, Return, Backspace | All ASCII, Return, Backspace | All ASCII |
-| **Case sensitive**   | Yes                          | No                           | Yes       |
 
 
 # License
